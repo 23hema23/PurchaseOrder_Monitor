@@ -1,0 +1,28 @@
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'Root entity for EKKO'
+define root view entity ZCDS_RE_ZEKKO as select from zekko
+composition [1..*] of ZCDS_I_ZEPKO as _item
+association [1] to ZCDS_I_POStatus as _StatusDom on $projection.Status = _StatusDom.Value 
+association [1] to ZCDS_I_SHIPMETHOD as _ShipMethodDom on $projection.ShippingMethod = _ShipMethodDom.Value 
+association [1] to ZCDS_I_PAYMode as _PayModeDom on $projection.PaymentMode = _PayModeDom.Value 
+{
+    key ebeln as PONumber,
+    aedat as CreationDate,
+    venid as VendorId,
+    vendesc as VendorDesc,
+    acc_no as AccountNo,
+    paymode as PaymentMode,
+    _PayModeDom.Text as PaymentModeText,
+    biadr as BillingAdd,
+    deadr as DeliveryAdd,
+    shipmethod as ShippingMethod,
+    _ShipMethodDom.Text as ShippingMethodText,
+    status as Status,
+    _StatusDom.Text as StatusText,
+    ven_tel_no as VendorTelNo,
+    created_by as CreatedBy,
+    _item,
+    _StatusDom,
+    _ShipMethodDom,
+    _PayModeDom
+}

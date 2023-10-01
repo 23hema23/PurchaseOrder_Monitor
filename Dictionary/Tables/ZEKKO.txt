@@ -1,0 +1,22 @@
+@EndUserText.label : 'Purchase Order Header'
+@AbapCatalog.enhancement.category : #NOT_EXTENSIBLE
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #A
+@AbapCatalog.dataMaintenance : #RESTRICTED
+define table zekko {
+
+  key client : abap.clnt not null;
+  key ebeln  : zgen_e_id not null;
+  aedat      : zgen_e_date;
+  venid      : zgen_e_id;
+  vendesc    : zgen_e_longtext;
+  acc_no     : zgen_e_id;
+  paymode    : zpo_e_paymode;
+  biadr      : zgen_e_longtext;
+  deadr      : zgen_e_longtext;
+  shipmethod : zgen_e_shipmethod;
+  status     : zpo_e_status;
+  ven_tel_no : zgen_e_short_text;
+  created_by : zgen_e_short_text;
+
+}

@@ -1,0 +1,74 @@
+CLASS zcl_temp_fill_zepko DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+  PUBLIC SECTION.
+    INTERFACES if_oo_adt_classrun.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+ENDCLASS.
+
+
+
+CLASS zcl_temp_fill_zepko IMPLEMENTATION.
+
+  METHOD if_oo_adt_classrun~main.
+
+    DATA : lt_zepko TYPE TABLE OF zepko.
+
+* Records for Purchase order items
+    lt_zepko = VALUE #(
+
+  ( ebeln ='PO1234567'  ebelp ='00001' matnr ='MAT12345678901' matdsc ='Round Paint Brush'   menge = 250 unit ='ST' currency ='DKK' untcst = 75 plifz = 90 )
+  ( ebeln ='PO1234567'  ebelp ='00002' matnr ='MAT12345678902' matdsc ='Flat Paint Brush'    menge = 500 unit ='ST' currency ='DKK' untcst = 60 plifz = 60 )
+  ( ebeln ='PO1234567'  ebelp ='00003' matnr ='MAT12345678903' matdsc ='Angled Paint Brush'  menge = 150 unit ='ST' currency ='DKK' untcst = 80 plifz = 75 )
+  ( ebeln ='PO9876543'  ebelp ='00001' matnr ='MAT98765432101' matdsc ='Fine Detail Brush'   menge = 300 unit ='ST' currency ='DKK' untcst = 55 plifz = 80 )
+  ( ebeln ='PO9876543'  ebelp ='00002' matnr ='MAT98765432102' matdsc ='Bristle Paint Brush' menge = 700 unit ='ST' currency ='DKK' untcst = 70 plifz = 95 )
+  ( ebeln ='PO9876543'  ebelp ='00003' matnr ='MAT98765432103' matdsc ='Fan Paint Brush'     menge = 450 unit ='ST' currency ='DKK' untcst = 65 plifz = 70 )
+  ( ebeln ='PO4567890'  ebelp ='00001' matnr ='MAT45678901201' matdsc ='Round Paint Brush'   menge = 800 unit ='ST' currency ='DKK' untcst = 75 plifz = 111 )
+  ( ebeln ='PO4567890'  ebelp ='00002' matnr ='MAT45678901202' matdsc ='Flat Paint Brush'    menge = 250 unit ='ST' currency ='DKK' untcst = 60 plifz = 122 )
+  ( ebeln ='PO4567890'  ebelp ='00003' matnr ='MAT45678901203' matdsc ='Angled Paint Brush'  menge = 300 unit ='ST' currency ='DKK' untcst = 80 plifz = 200 )
+  ( ebeln ='PO7890123'  ebelp ='00001' matnr ='MAT78901230101' matdsc ='Fine Detail Brush'   menge = 150 unit ='ST' currency ='DKK' untcst = 55 plifz = 80 )
+  ( ebeln ='PO7890123'  ebelp ='00002' matnr ='MAT78901230102' matdsc ='Bristle Paint Brush' menge = 450 unit ='ST' currency ='DKK' untcst = 70 plifz = 60 )
+  ( ebeln ='PO7890123'  ebelp ='00003' matnr ='MAT78901230103' matdsc ='Fan Paint Brush'     menge = 200 unit ='ST' currency ='DKK' untcst = 65 plifz = 95 )
+  ( ebeln ='PO2345678'  ebelp ='00001' matnr ='MAT23456780101' matdsc ='Round Paint Brush'   menge = 700 unit ='ST' currency ='DKK' untcst = 75 plifz = 70 )
+  ( ebeln ='PO2345678'  ebelp ='00002' matnr ='MAT23456780102' matdsc ='Flat Paint Brush'    menge = 150 unit ='ST' currency ='DKK' untcst = 60 plifz = 75 )
+  ( ebeln ='PO2345678'  ebelp ='00003' matnr ='MAT23456780103' matdsc ='Angled Paint Brush'  menge = 400 unit ='ST' currency ='DKK' untcst = 80 plifz = 90 )
+  ( ebeln ='PO5678901'  ebelp ='00001' matnr ='MAT56789010101' matdsc ='Fine Detail Brush'   menge = 500 unit ='ST' currency ='DKK' untcst = 55 plifz = 60 )
+  ( ebeln ='PO5678901'  ebelp ='00002' matnr ='MAT56789010102' matdsc ='Bristle Paint Brush' menge = 800 unit ='ST' currency ='DKK' untcst = 70 plifz = 70 )
+  ( ebeln ='PO5678901'  ebelp ='00003' matnr ='MAT56789010103' matdsc ='Fan Paint Brush'     menge = 250 unit ='ST' currency ='DKK' untcst = 65 plifz = 80 )
+  ( ebeln ='PO1234509'  ebelp ='00001' matnr ='MAT12345090101' matdsc ='Round Paint Brush'   menge = 300 unit ='ST' currency ='DKK' untcst = 55 plifz = 100 )
+  ( ebeln ='PO1234509'  ebelp ='00002' matnr ='MAT12345090102' matdsc ='Flat Paint Brush'    menge = 200 unit ='ST' currency ='DKK' untcst = 70 plifz = 60 )
+  ( ebeln ='PO1234509'  ebelp ='00003' matnr ='MAT12345090103' matdsc ='Angled Paint Brush'  menge = 150 unit ='ST' currency ='DKK' untcst = 65 plifz = 190 )
+  ( ebeln ='PO3456789'  ebelp ='00001' matnr ='MAT34567890101' matdsc ='Fine Detail Brush'   menge = 600 unit ='ST' currency ='DKK' untcst = 55 plifz = 101 )
+  ( ebeln ='PO3456789'  ebelp ='00002' matnr ='MAT34567890102' matdsc ='Bristle Paint Brush' menge = 350 unit ='ST' currency ='DKK' untcst = 70 plifz = 75 )
+  ( ebeln ='PO3456789'  ebelp ='00003' matnr ='MAT34567890103' matdsc ='Fan Paint Brush'     menge = 450 unit ='ST' currency ='DKK' untcst = 65 plifz = 120 )
+  ( ebeln ='PO6789012'  ebelp ='00001' matnr ='MAT67890120101' matdsc ='Round Paint Brush'   menge = 750 unit ='ST' currency ='DKK' untcst = 55 plifz = 60 )
+  ( ebeln ='PO6789012'  ebelp ='00002' matnr ='MAT67890120102' matdsc ='Flat Paint Brush'    menge = 400 unit ='ST' currency ='DKK' untcst = 60 plifz = 60 )
+  ( ebeln ='PO6789012'  ebelp ='00003' matnr ='MAT67890120103' matdsc ='Angled Paint Brush'  menge = 300 unit ='ST' currency ='DKK' untcst = 80 plifz = 95 )
+  ( ebeln ='PO8901234'  ebelp ='00001' matnr ='MAT89012340101' matdsc ='Fine Detail Brush'   menge = 450 unit ='ST' currency ='DKK' untcst = 55 plifz = 80 )
+  ( ebeln ='PO8901234'  ebelp ='00002' matnr ='MAT89012340102' matdsc ='Bristle Paint Brush' menge = 800 unit ='ST' currency ='DKK' untcst = 70 plifz = 70 )
+  ( ebeln ='PO8901234'  ebelp ='00003' matnr ='MAT89012340103' matdsc ='Fan Paint Brush'     menge = 550 unit ='ST' currency ='DKK' untcst = 65 plifz = 60 )
+  ( ebeln ='PO2345888'  ebelp ='00001' matnr ='MAT23456780201' matdsc ='Round Paint Brush'   menge = 700 unit ='ST' currency ='DKK' untcst = 75 plifz = 80 )
+  ( ebeln ='PO2345888'  ebelp ='00002' matnr ='MAT23456780202' matdsc ='Flat Paint Brush'    menge = 150 unit ='ST' currency ='DKK' untcst = 60 plifz = 70 )
+  ( ebeln ='PO2345888'  ebelp ='00003' matnr ='MAT23456780203' matdsc ='Angled Paint Brush'  menge = 400 unit ='ST' currency ='DKK' untcst = 80 plifz = 60 )
+  ( ebeln ='PO3456777'  ebelp ='00001' matnr ='MAT34567890201' matdsc ='Fine Detail Brush'   menge = 600 unit ='ST' currency ='DKK' untcst = 55 plifz = 80 )
+  ( ebeln ='PO3456777'  ebelp ='00002' matnr ='MAT34567890202' matdsc ='Bristle Paint Brush' menge = 350 unit ='ST' currency ='DKK' untcst = 70 plifz = 95 )
+  ( ebeln ='PO3456777'  ebelp ='00003' matnr ='MAT34567890203' matdsc ='Fan Paint Brush'     menge = 450 unit ='ST' currency ='DKK' untcst = 65 plifz = 70 )
+  ( ebeln ='PO2345999'  ebelp ='00001' matnr ='MAT45678900201' matdsc ='Round Paint Brush'   menge = 800 unit ='ST' currency ='DKK' untcst = 75 plifz = 140 )
+  ( ebeln ='PO2345999'  ebelp ='00002' matnr ='MAT45678900202' matdsc ='Flat Paint Brush'    menge = 250 unit ='ST' currency ='DKK' untcst = 60 plifz = 250 )
+  ( ebeln ='PO2345999'  ebelp ='00003' matnr ='MAT45678900203' matdsc ='Angled Paint Brush'  menge = 300 unit ='ST' currency ='DKK' untcst = 80 plifz = 120 )
+  ( ebeln ='PO3456888'  ebelp ='00001' matnr ='MAT45678900201' matdsc ='Round Paint Brush'   menge = 800 unit ='ST' currency ='DKK' untcst = 75 plifz = 180 )
+  ( ebeln ='PO3456888'  ebelp ='00002' matnr ='MAT45678900202' matdsc ='Flat Paint Brush'    menge = 250 unit ='ST' currency ='DKK' untcst = 60 plifz = 150 )
+  ( ebeln ='PO3456888'  ebelp ='00003' matnr ='MAT45678900203' matdsc ='Angled Paint Brush'  menge = 300 unit ='ST' currency ='DKK' untcst = 80 plifz = 200 )
+  ).
+
+    MODIFY zepko FROM TABLE @lt_zepko.
+
+    out->write( 'Records Updated' ).
+
+
+  ENDMETHOD.
+
+ENDCLASS.

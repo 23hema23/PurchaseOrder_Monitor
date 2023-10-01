@@ -1,0 +1,57 @@
+@AbapCatalog.viewEnhancementCategory: [#NONE]
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'CDS for monitoring PO'
+@Metadata.ignorePropagatedAnnotations: true
+@ObjectModel.usageType:{
+    serviceQuality: #X,
+    sizeCategory: #M,
+    dataClass: #MIXED
+}
+define view entity ZCDS_I_PO_MONITOR
+  as select from zpo_monitor
+  association [0..1] to ZCDS_I_ZEPKO  as _itemDetail    on  $projection.PONumber   = _itemDetail.PONumber
+                                                        and $projection.ItemNumber = _itemDetail.ItemNumber
+  association [0..1] to ZCDS_RE_ZEKKO as _headerDetail  on  $projection.PONumber = _headerDetail.PONumber
+  association [0..1] to I_User        as _CreatedByUser on  $projection.CreatedBy = _CreatedByUser.UserID
+  association [0..1] to I_User        as _UpdatedByUser on  $projection.UpdatedBy = _UpdatedByUser.UserID
+{
+      @EndUserText.label: 'PO Number'
+  key ebeln                          as PONumber,
+      @EndUserText.label: 'Item Number'
+  key ebelp                          as ItemNumber,
+      @EndUserText.label: 'Material No'
+      _itemDetail.MaterialNo         as MaterialNo,
+      @EndUserText.label: 'Material Description'
+      _itemDetail.MaterialDesc       as MaterialDesc,
+      @EndUserText.label: 'Quantity'
+      @Semantics.quantity.unitOfMeasure: 'Unit'
+      _itemDetail.Quantity           as Quantity,
+      @EndUserText.label: 'Unit'
+      _itemDetail.Unit               as Unit,
+      @EndUserText.label: 'Unit Cost'
+      @Semantics.amount.currencyCode: 'Currency'
+      _itemDetail.UnitCost           as UnitCost,
+      @EndUserText.label: 'Currency'
+      _itemDetail.Currency           as Currency,
+      @EndUserText.label: 'Payment term Days'
+      _itemDetail.PaytermDays        as PaytermDays,
+      @EndUserText.label: 'PO Creation Date'
+      _headerDetail.CreationDate     as PO_CreationDate,
+      @EndUserText.label: 'Created By ID'
+      createdby                      as CreatedBy,
+      @EndUserText.label: 'Created By Name'
+      _CreatedByUser.UserDescription as CreatedByName,
+      @EndUserText.label: 'Record Created At'
+      createdat                      as CreatedAt,
+      @EndUserText.label: 'Updated By ID'
+      updatedby                      as UpdatedBy,
+      @EndUserText.label: 'Updated By Name'
+      _UpdatedByUser.UserDescription as UpdatedByName,
+      @EndUserText.label: 'Record Updated At'
+      updatedat                      as UpdatedAt,
+      _itemDetail,
+      _headerDetail,
+      _CreatedByUser,
+      _UpdatedByUser
+
+}

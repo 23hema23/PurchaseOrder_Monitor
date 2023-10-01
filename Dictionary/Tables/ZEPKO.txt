@@ -1,0 +1,19 @@
+@EndUserText.label : 'Purchase Order Item'
+@AbapCatalog.enhancement.category : #NOT_EXTENSIBLE
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #A
+@AbapCatalog.dataMaintenance : #RESTRICTED
+define table zepko {
+
+  key client : abap.clnt not null;
+  key ebeln  : zgen_e_id not null;
+  key ebelp  : zden_e_po_item_id not null;
+  matnr      : zgen_e_short_text;
+  matdsc     : zgen_e_short_text;
+  menge      : zgen_e_quantity;
+  unit       : zgen_e_unit;
+  currency   : zgen_e_currency;
+  untcst     : zgen_e_price;
+  plifz      : zgen_e_payterm_days;
+
+}

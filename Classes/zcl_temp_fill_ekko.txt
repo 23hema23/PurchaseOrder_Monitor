@@ -1,0 +1,59 @@
+CLASS zcl_temp_fill_ekko DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+  PUBLIC SECTION.
+    INTERFACES if_oo_adt_classrun.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+ENDCLASS.
+
+
+
+CLASS zcl_temp_fill_ekko IMPLEMENTATION.
+
+  METHOD if_oo_adt_classrun~main.
+
+    DATA : lt_ekko TYPE TABLE OF zekko.
+
+*   Records for Purchase Orders
+    lt_ekko = VALUE #(
+
+          ( ebeln ='PO1234567' aedat ='20220315'  venid ='VND12345'    vendesc ='Paint Supplier A'        acc_no ='ACC5678901'  paymode ='1'   biadr ='123 Main St, Copenhagen'  deadr ='456 Elm St, Aarhus'        shipmethod ='1'   status ='C'   ven_tel_no
+  ='4512345678'   created_by ='John Doe'         )
+          ( ebeln ='PO9876543' aedat ='20220420'  venid ='VND67890'    vendesc ='Art Supplies Ltd'        acc_no ='ACC6789012'  paymode ='2'   biadr ='789 Oak St, Aalborg'      deadr ='321 Birch Rd, Odense'      shipmethod ='2'   status ='F'   ven_tel_no
+  ='4556781234'   created_by ='Jane Smith'       )
+          ( ebeln ='PO4567890' aedat ='20230929'  venid ='VND23456'    vendesc ='Creative Colors Co.'     acc_no ='ACC3456123'  paymode ='3'   biadr ='567 Pine St, Esbjerg'     deadr ='789 Cedar Ave, Roskilde'   shipmethod ='3'   status ='I'   ven_tel_no
+  ='4598765432'   created_by ='Michael Johnson'  )
+          ( ebeln ='PO7890123' aedat ='20220625'  venid ='VND56789'    vendesc ='Brush World Inc.'        acc_no ='ACC4567890'  paymode ='1'   biadr ='234 Maple Rd, Aarhus'     deadr ='123 Oak St, Copenhagen'    shipmethod ='1'   status ='O'   ven_tel_no
+  ='4534567890'   created_by ='Sarah Miller'     )
+          ( ebeln ='PO2345678' aedat ='20220705'  venid ='VND12345'    vendesc ='Artistic Creations'      acc_no ='ACC5678901'  paymode ='2'   biadr ='456 Cedar Ave, Odense'    deadr ='678 Elm St, Aalborg'       shipmethod ='2'   status ='P'   ven_tel_no
+  ='4565432109'   created_by ='David Wilson'     )
+          ( ebeln ='PO5678901' aedat ='20220812'  venid ='VND67890'    vendesc ='Brush Palace'            acc_no ='ACC6789012'  paymode ='3'   biadr ='789 Birch Rd, Roskilde'   deadr ='321 Pine St, Esbjerg'      shipmethod ='3'   status ='R'   ven_tel_no
+  ='4589012345'   created_by ='Lisa Anderson'    )
+          ( ebeln ='PO1234509' aedat ='20230920'  venid ='VND23456'    vendesc ='Colorful Creations Co.'  acc_no ='ACC3456123'  paymode ='1'   biadr ='123 Elm St, Copenhagen'   deadr ='456 Oak St, Aarhus'        shipmethod ='1'   status ='S'   ven_tel_no
+  ='4512345678'   created_by ='Richard Smith'    )
+          ( ebeln ='PO3456789' aedat ='20221008'  venid ='VND56789'    vendesc ='Brush Haven'             acc_no ='ACC4567890'  paymode ='2'   biadr ='789 Pine St, Aalborg'     deadr ='234 Cedar Ave, Odense'     shipmethod ='2'   status ='C'   ven_tel_no
+  ='4556789012'   created_by ='Emily White'      )
+          ( ebeln ='PO6789012' aedat ='20221117'  venid ='VND12345'    vendesc ='Artistic Expressions'    acc_no ='ACC5678901'  paymode ='3'   biadr ='234 Cedar Ave, Roskilde'  deadr ='567 Birch Rd, Esbjerg'     shipmethod ='3'   status ='F'   ven_tel_no
+  ='4590123456'   created_by ='Robert Davis'     )
+          ( ebeln ='PO8901234' aedat ='20221222'  venid ='VND67890'    vendesc ='ColorSplash Supplies'    acc_no ='ACC6789012'  paymode ='1'   biadr ='456 Oak St, Aarhus'       deadr ='789 Elm St, Copenhagen'    shipmethod ='1'   status ='I'   ven_tel_no
+  ='4534567890'   created_by ='Jennifer Brown'   )
+          ( ebeln ='PO2345888' aedat ='20230110'  venid ='VND12345'    vendesc ='Rainbow Brushes Inc.'    acc_no ='ACC5678901'  paymode ='2'   biadr ='567 Cedar Ave, Odense'    deadr ='123 Pine St, Aalborg'      shipmethod ='2'   status ='O'   ven_tel_no
+  ='4512345678'   created_by ='William Jones'    )
+          ( ebeln ='PO3456777' aedat ='20230214'  venid ='VND56789'    vendesc ='Danish Art Supplies'     acc_no ='ACC4567890'  paymode ='3'   biadr ='678 Elm St, Copenhagen'   deadr ='321 Birch Rd, Aarhus'      shipmethod ='3'   status ='P'   ven_tel_no
+  ='4589012345'   created_by ='Laura Taylor'     )
+          ( ebeln ='PO2345999' aedat ='20230709'  venid ='VND12345'    vendesc ='Brush Creations'         acc_no ='ACC5678901'  paymode ='2'   biadr ='567 Elm St, Aarhus'       deadr ='123 Cedar Ave, Copenhagen' shipmethod ='2'   status ='I'   ven_tel_no
+  ='4534567890'   created_by ='William Davis'    )
+          ( ebeln ='PO3456888' aedat ='20230926'  venid ='VND67890'    vendesc ='Colorful Innovations'    acc_no ='ACC6789012'  paymode ='3'   biadr ='678 Oak St, Odense'       deadr ='789 Birch Rd, Aalborg'     shipmethod ='3'   status ='O'   ven_tel_no
+  ='4589012345'   created_by ='Laura Johnson'    )
+
+  ).
+
+    MODIFY zekko FROM TABLE @lt_ekko.
+
+    out->write( 'Records Updated' ).
+  ENDMETHOD.
+
+ENDCLASS.

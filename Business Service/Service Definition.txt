@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service defination for PO Data'
+define service ZSRV_PO_DATA {
+  expose ZCDS_I_PO_MONITOR as PO_Data;
+}

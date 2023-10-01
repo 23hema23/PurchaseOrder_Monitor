@@ -1,0 +1,16 @@
+@EndUserText.label : 'PO Monitor table'
+@AbapCatalog.enhancement.category : #NOT_EXTENSIBLE
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #A
+@AbapCatalog.dataMaintenance : #RESTRICTED
+define table zpo_monitor {
+
+  key client : abap.clnt not null;
+  key ebeln  : zgen_e_id not null;
+  key ebelp  : zden_e_po_item_id not null;
+  createdat  : timestampl;
+  createdby  : syuname;
+  updatedat  : timestampl;
+  updatedby  : syuname;
+
+}

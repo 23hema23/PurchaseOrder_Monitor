@@ -1,0 +1,16 @@
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'CDS for PO item'
+define view entity ZCDS_I_ZEPKO as select from zepko
+association to parent ZCDS_RE_ZEKKO  as _header    on $projection.PONumber = _header.PONumber
+{
+    key ebeln as PONumber,
+    key ebelp as ItemNumber,
+    matnr as MaterialNo,
+    matdsc as MaterialDesc,
+    menge as Quantity,
+    unit as Unit,
+    currency as Currency,
+    untcst as UnitCost,
+    plifz as PaytermDays,
+    _header
+}
