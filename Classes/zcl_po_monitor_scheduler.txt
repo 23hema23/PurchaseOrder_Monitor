@@ -34,7 +34,7 @@ CLASS zcl_po_monitor_scheduler IMPLEMENTATION.
     ls_job_parameters-name = 'S_PO_CRE'.
     CLEAR ls_value.
     ls_value-sign = 'I'.
-    ls_value-option = 'EQ'.
+    ls_value-option = 'GE'.
     ls_value-low = '30'.
     APPEND ls_value TO ls_job_parameters-t_value.
     APPEND ls_job_parameters TO lt_job_parameters.
@@ -43,7 +43,7 @@ CLASS zcl_po_monitor_scheduler IMPLEMENTATION.
     ls_job_parameters-name = 'S_PAYTER'.
     CLEAR ls_value.
     ls_value-sign = 'I'.
-    ls_value-option = 'EQ'.
+    ls_value-option = 'GT'.
     ls_value-low = '100'.
     APPEND ls_value TO ls_job_parameters-t_value.
     APPEND ls_job_parameters TO lt_job_parameters.
