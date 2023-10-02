@@ -20,11 +20,11 @@ CLASS zcl_po_monitor_job IMPLEMENTATION.
               creation_days     TYPE ty_days,
               payment_term_days TYPE zgen_e_payterm_days,
             END OF ty_s_params.
-    DATA : lr_creation_days     TYPE RANGE OF cl_apj_rt_api=>ty_value_range,
-           lv_max_creation_days TYPE ty_days,
-           lr_payment_term_days TYPE RANGE OF cl_apj_rt_api=>ty_value_range,
-           lv_min_pay_term_days TYPE zgen_e_payterm_days,
-           lv_creation_limit    TYPE sy-datum,
+    DATA : lr_creation_days     TYPE RANGE OF zgen_e_date,
+*           lv_max_creation_days TYPE ty_days,
+           lr_payment_term_days TYPE RANGE OF zgen_e_payterm_days,
+*           lv_min_pay_term_days TYPE zgen_e_payterm_days,
+           lv_create_date       TYPE zgen_e_date,
            lt_monitor_table     TYPE TABLE OF ZPO_Monitor,
            lt_parameter_table   TYPE TABLE OF ty_s_params.
 
@@ -32,39 +32,17 @@ CLASS zcl_po_monitor_job IMPLEMENTATION.
       CASE ls_parameter-selname.
 
         WHEN 'S_PO_CRE'.
+          lv_create_date = sy-datum - CONV ty_days( ls_parameter-low ).
           lr_creation_days = VALUE #( BASE lr_creation_days (
                     sign = ls_parameter-sign option = ls_parameter-option
-                    low = ls_parameter-low high = ls_parameter-high ) ).
+                    low = CONV #( lv_create_date )  ) ).
 
         WHEN 'S_PAYTER'.
           lr_payment_term_days = VALUE #( BASE lr_payment_term_days (
                     sign = ls_parameter-sign option = ls_parameter-option
-                    low = ls_parameter-low high = ls_parameter-high ) ).
+                    low = CONV #( ls_parameter-low ) high = CONV #( ls_parameter-high ) ) ).
       ENDCASE.
     ENDLOOP.
-
-    LOOP AT lr_payment_term_days INTO DATA(ls_paymentterm).
-      lt_parameter_table = VALUE #( BASE lt_parameter_table (
-       payment_term_days = CONV #( ls_paymentterm-low )
-       creation_days = CONV #( lr_creation_days[ sy-tabix ]-low ) ) ).
-
-    ENDLOOP.
-
-*  Determine min payment term
-    SORT lt_parameter_table BY payment_term_days ASCENDING.
-    READ TABLE lt_parameter_table INTO DATA(ls_po_parameter) INDEX 1.
-    IF sy-subrc = 0.
-      lv_min_pay_term_days = ls_po_parameter-payment_term_days.
-    ENDIF.
-    CLEAR : ls_po_parameter.
-
-*  Determine max created days
-    SORT lt_parameter_table BY creation_days DESCENDING.
-    READ TABLE lt_parameter_table INTO ls_po_parameter INDEX 1.
-    IF sy-subrc = 0.
-      lv_max_creation_days = ls_po_parameter-creation_days.
-    ENDIF.
-    lv_creation_limit = sy-datum - lv_max_creation_days.
 
 *   Select data based on parameters
     SELECT zekpo~PONumber AS ebeln,
@@ -72,8 +50,8 @@ CLASS zcl_po_monitor_job IMPLEMENTATION.
     JOIN zcds_re_zekko AS zekko
     ON zekpo~PONumber = zekko~PONumber
     WHERE
-    zekko~CreationDate >= @lv_creation_limit AND
-    PaytermDays > @lv_min_pay_term_days
+    zekko~CreationDate IN @lr_creation_days AND
+    PaytermDays IN @lr_payment_term_days
     INTO CORRESPONDING FIELDS OF TABLE @lt_monitor_table.
 
     GET TIME STAMP FIELD DATA(lv_timestamp).
@@ -102,14 +80,14 @@ CLASS zcl_po_monitor_job IMPLEMENTATION.
 
 *   Parameter definition
     et_parameter_def = VALUE #(
-     ( selname = 'S_PO_CRE' kind = if_apj_dt_exec_object=>select_option hidden_ind = abap_false changeable_ind = abap_true mandatory_ind = abap_true   datatype = 'N' length = 5  param_text = 'PO CREATED WITHIN' )
-     ( selname = 'S_PAYTER' kind = if_apj_dt_exec_object=>select_option hidden_ind = abap_false changeable_ind = abap_true mandatory_ind = abap_true   datatype = 'N' length = 5  param_text = 'MIN PAYMENT TERM' )
+     ( selname = 'S_PO_CRE' kind = if_apj_dt_exec_object=>select_option hidden_ind = abap_false changeable_ind = abap_true mandatory_ind = abap_true   datatype = 'N' length = 5  param_text = 'PO CREATED WITHIN - Days' )
+     ( selname = 'S_PAYTER' kind = if_apj_dt_exec_object=>select_option hidden_ind = abap_false changeable_ind = abap_true mandatory_ind = abap_true   datatype = 'N' length = 5  param_text = 'PAYMENT TERM' )
      ).
 
 *   Parameter values
     et_parameter_val = VALUE #(
-    ( selname = 'S_PO_CRE'  kind = if_apj_dt_exec_object=>select_option sign = 'I' option = 'EQ' low = 30 )
-    ( selname = 'S_PAYTER'  kind = if_apj_dt_exec_object=>select_option sign = 'I' option = 'EQ' low = 100 )
+    ( selname = 'S_PO_CRE'  kind = if_apj_dt_exec_object=>select_option sign = 'I' option = 'GE' low = 30  )
+    ( selname = 'S_PAYTER'  kind = if_apj_dt_exec_object=>select_option sign = 'I' option = 'GT' low = 100 )
      ).
 
   ENDMETHOD.
